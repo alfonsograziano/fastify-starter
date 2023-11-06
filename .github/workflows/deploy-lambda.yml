@@ -1,0 +1,28 @@
+name: Deploy Lambda Function
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1 
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to AWS Lambda
+        run: |
+          zip -r function.zip .
+          aws lambda update-function-code --function-name fastify-app --zip-file fileb://function.zip
