@@ -11,7 +11,7 @@ test("server returns hello world", async (t) => {
   });
 
   assert.strictEqual(response.statusCode, 200);
-  assert.strictEqual(response.body, '{"hello":"world"}');
+  assert.strictEqual(response.body, '{"hello":"people"}');
 });
 
 test("server returns foo:bar", async (t) => {
