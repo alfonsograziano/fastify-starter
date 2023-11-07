@@ -20,7 +20,10 @@ jobs:
           aws-region: eu-west-1
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
 
       - name: Deploy to AWS Lambda
         run: |
